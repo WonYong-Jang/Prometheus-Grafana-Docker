@@ -4,7 +4,40 @@
 참고하여 구성 했고, [Spring boot 어플리케이션](https://github.com/WonYong-Jang/Pharmacy-Recommendation)을 대상으로 모니터링 환경을 구축   
 
 Grafana에서 제공하는 대시보드 [Spring boot statistics](https://grafana.com/grafana/dashboards/11378-justai-system-monitor/) 와 
-[Resilience4j grafana](https://github.com/resilience4j/resilience4j/blob/master/grafana_dashboard.json) 를 import 하여 사용   
+[Resilience4j grafana](https://github.com/resilience4j/resilience4j/blob/master/grafana_dashboard.json) 를 import 하여 사용
+
+# Circuit Breaker(Resilience4j) 설정 
+
+
+##### build.gradle
+
+##### application.yml
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus, health'
+
+resilience4j:
+  circuitbreaker:
+    metrics:
+      legacy:
+        enabled: true
+```
+
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter-web'
+
+// resilience4j
+implementation 'io.github.resilience4j:resilience4j-spring-boot2:1.7.0'
+implementation 'io.github.resilience4j:resilience4j-all:1.7.0'
+
+// prometheus
+implementation 'org.springframework.boot:spring-boot-starter-actuator'
+implementation 'io.micrometer:micrometer-registry-prometheus'
+```
 
 # Result
 
@@ -15,7 +48,7 @@ Grafana에서 제공하는 대시보드 [Spring boot statistics](https://grafana
 
 # Reference
 
-<https://godekdls.github.io/Resilience4j/grafana/>  
-<https://godekdls.github.io/Resilience4j/spring-boot-2-getting-started/>
+<https://godekdls.github.io/Resilience4j/grafana/>    
+<https://godekdls.github.io/Resilience4j/spring-boot-2-getting-started/>    
 <https://github.com/resilience4j/resilience4j/issues/1186>
 
