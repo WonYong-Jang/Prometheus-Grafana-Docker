@@ -11,8 +11,6 @@ Grafana에서 제공하는 대시보드 [Spring boot statistics](https://grafana
 
 ##### build.gradle
 
-##### application.yml
-
 ```yaml
 management:
   endpoints:
@@ -26,6 +24,8 @@ resilience4j:
       legacy:
         enabled: true
 ```
+
+##### application.yml
 
 ```gradle
 implementation 'org.springframework.boot:spring-boot-starter-web'
